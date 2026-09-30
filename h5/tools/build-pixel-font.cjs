@@ -1,5 +1,4 @@
 // Original 5x7 glyphs, shared by the DOM font and the canvas pixel renderer.
-// npm install; npm run build:font. The shipped HTML remains self-contained.
 const opentype = require('opentype.js');
 const source = require('./pixel-glyphs.json');
 const glyphs = Object.fromEntries(
