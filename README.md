@@ -1,5 +1,7 @@
 # Color Linez Adapted
 
+[Play online](https://vki1024gs.github.io/color-linez-adapted/)
+
 **v0.4** — an HTML5 adaptation of Color Lines developed with **GPT-6 Astra**, featuring retro pixel art and sound effects. Available in English, Simplified Chinese, and Traditional Chinese.
 
 ## Play and deploy
