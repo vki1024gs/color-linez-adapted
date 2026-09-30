@@ -21,5 +21,4 @@ Source: `h5/src/`. Build output: `index.html`.
 
 - **Color Lines (1992), GAMOS LTD** — Olga Demina (programming); Igor Ivkin and Gennady Denisov (graphics).
 - **Color Linez Win32 (1998–1999)** — Ivan Golubev (m53group); special thanks to Andrew Wizard.
-- **Reference reconstruction** — [QianNangong/Winlinez](https://github.com/QianNangong/Winlinez).
 - **Chinese pixel font** — [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font) by TakWolf, SIL OFL 1.1. License notices are included in `h5/licenses/` and the game file.
