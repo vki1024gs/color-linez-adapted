@@ -1,0 +1,22 @@
+// Rules use cell indices; pixel coordinates belong exclusively to layout.js.
+const BOARD_SIZE = 9;
+const BOARD_CELL_COUNT = BOARD_SIZE * BOARD_SIZE;
+const BALL_COLOR_COUNT = 7;
+const MINIMUM_LINE_LENGTH = 5;
+const INITIAL_BALL_COUNT = 5;
+const NEXT_BALL_COUNT = 3;
+const HIGH_SCORE_COUNT = 10;
+const MAX_PLAYER_NAME_LENGTH = 13;
+const DEFAULT_PLAYER_NAME = 'Pretender';
+
+export {
+  BOARD_SIZE,
+  BOARD_CELL_COUNT,
+  BALL_COLOR_COUNT,
+  MINIMUM_LINE_LENGTH,
+  INITIAL_BALL_COUNT,
+  NEXT_BALL_COUNT,
+  HIGH_SCORE_COUNT,
+  MAX_PLAYER_NAME_LENGTH,
+  DEFAULT_PLAYER_NAME,
+};

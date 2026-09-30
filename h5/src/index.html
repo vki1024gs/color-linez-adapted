@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-visual"
+    />
+    <title>Color Linez Adapted</title>
+    <!-- INLINE_STYLES -->
+    <!-- INLINE_LICENSES -->
+  </head>
+  <body>
+    <div id="safe-area" aria-hidden="true"></div>
+    <div id="scale-shell">
+      <div id="pixel-stage">
+        <div class="win" id="win">
+          <div class="titlebar">
+            <div class="t">Color Linez Adapted</div>
+            <button
+              type="button"
+              class="tb-btn"
+              id="btn-close"
+              data-i18n-title="interruptTooltip"
+              data-i18n-aria-label="interruptGame"
+            >
+              ×
+            </button>
+          </div>
+          <div class="menubar" id="menubar">
+            <div class="menu-item" data-menu="file">
+              <button
+                class="menu-trigger"
+                type="button"
+                aria-expanded="false"
+                data-i18n="file"
+              ></button>
+              <div class="dropdown">
+                <button type="button" class="dd-item" data-cmd="new">
+                  <span data-i18n="new"></span> <span class="acc">F4</span>
+                </button>
+                <button type="button" class="dd-item" data-cmd="scores" data-i18n="scores"></button>
+                <button type="button" class="dd-item" data-cmd="next">
+                  <span class="chk" id="chk-next">&#10003;</span><span data-i18n="next"></span>
+                  <span class="acc">F3</span>
+                </button>
+                <button type="button" class="dd-item" data-cmd="colors">
+                  <span class="chk" id="chk-colors">&#10003;</span><span data-i18n="colors"></span>
+                  <span class="acc">F5</span>
+                </button>
+                <div class="dd-sep"></div>
+                <button type="button" class="dd-item" data-cmd="exit">
+                  <span data-i18n="interruptGame"></span>
+                  <span class="acc">Alt+X</span>
+                </button>
+              </div>
+            </div>
+            <div class="menu-item" data-menu="options">
+              <button
+                class="menu-trigger"
+                type="button"
+                aria-expanded="false"
+                data-i18n="settings"
+              ></button>
+              <div class="dropdown settings-dropdown">
+                <button
+                  type="button"
+                  class="dd-item"
+                  data-cmd="audio"
+                  data-i18n="audioSettings"
+                ></button>
+                <button
+                  type="button"
+                  class="dd-item"
+                  data-cmd="auto-resume"
+                  role="menuitemcheckbox"
+                  aria-checked="true"
+                >
+                  <span class="chk">✓</span><span data-i18n="autoResume"></span>
+                </button>
+                <div class="dd-sep"></div>
+                <div class="dd-heading" id="size-heading" data-i18n="size"></div>
+                <button
+                  type="button"
+                  class="dd-item"
+                  data-cmd="fullscreen"
+                  role="menuitemcheckbox"
+                  aria-checked="false"
+                >
+                  <span class="chk">✓</span><span data-i18n="fullscreenMode"></span>
+                  <span class="acc">F11</span>
+                </button>
+                <div role="group" aria-labelledby="size-heading">
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-scale="auto"
+                    role="menuitemradio"
+                    aria-checked="true"
+                  >
+                    <span class="chk">✓</span><span data-i18n="auto"></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-scale="1"
+                    role="menuitemradio"
+                    aria-checked="false"
+                  >
+                    <span class="chk">✓</span>1×
+                  </button>
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-scale="2"
+                    role="menuitemradio"
+                    aria-checked="false"
+                  >
+                    <span class="chk">✓</span>2×
+                  </button>
+                </div>
+                <div class="dd-sep"></div>
+                <div class="dd-heading" id="language-heading" data-i18n="language"></div>
+                <div role="group" aria-labelledby="language-heading">
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-language="zh-Hans"
+                    role="menuitemradio"
+                    aria-checked="false"
+                    lang="zh-Hans"
+                  >
+                    <span class="chk">✓</span>简体中文
+                  </button>
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-language="zh-Hant"
+                    role="menuitemradio"
+                    aria-checked="false"
+                    lang="zh-Hant"
+                  >
+                    <span class="chk">✓</span>繁體中文
+                  </button>
+                  <button
+                    type="button"
+                    class="dd-item"
+                    data-language="en"
+                    role="menuitemradio"
+                    aria-checked="true"
+                    lang="en"
+                  >
+                    <span class="chk">✓</span>English
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="menu-item" data-menu="help">
+              <button
+                class="menu-trigger"
+                type="button"
+                aria-expanded="false"
+                data-i18n="help"
+              ></button>
+              <div class="dropdown">
+                <button type="button" class="dd-item" data-cmd="rules">
+                  <span data-i18n="rules"></span> <span class="acc">F1</span>
+                </button>
+                <button type="button" class="dd-item" data-cmd="about" data-i18n="about"></button>
+              </div>
+            </div>
+          </div>
+          <div class="client">
+            <canvas id="cv" width="1224" height="762"></canvas>
+          </div>
+          <div class="statusbar">
+            <div
+              class="pane"
+              id="status-bar"
+              data-i18n="status"
+              style="flex: 0 0 auto; min-width: 230px"
+            ></div>
+            <div class="pane" id="pane-score" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div id="closed-screen">
+          <p data-i18n="interrupted" style="margin-bottom: 14px"></p>
+          <p data-i18n="interruptedNotice" style="margin: 0 18px 14px"></p>
+          <button class="btn" id="btn-resume" data-i18n="resume"></button>
+        </div>
+
+        <!-- ===== Rules dialog ===== -->
+        <div class="overlay" id="dlg-rules">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-rules-title"
+            style="width: 380px"
+          >
+            <div class="dlg-title">
+              <span id="dlg-rules-title" data-i18n="rules"></span>
+            </div>
+            <div class="dlg-body">
+              <div data-i18n="rulesText" style="width: 340px"></div>
+              <div class="dlg-actions">
+                <button class="btn" data-close="dlg-rules" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== High scores dialog ===== -->
+        <div class="overlay" id="dlg-scores">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-scores-title"
+            style="width: 410px"
+          >
+            <div class="dlg-title">
+              <span id="dlg-scores-title" data-i18n="scores"></span>
+            </div>
+            <div class="dlg-body">
+              <table class="hs-table" id="hs-table"></table>
+              <div class="dlg-actions">
+                <button class="btn" data-close="dlg-scores" data-i18n="ok"></button>
+                <button class="btn" id="btn-reset-scores" data-i18n="resetScores"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Colors (statistics) dialog ===== -->
+        <div class="overlay" id="dlg-colors">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-colors-title"
+            style="width: 250px"
+          >
+            <div class="dlg-title">
+              <span id="dlg-colors-title" data-i18n="colors"></span>
+            </div>
+            <div class="dlg-body">
+              <div id="colors-body" style="line-height: 20px"></div>
+              <div class="dlg-actions">
+                <button class="btn" data-close="dlg-colors" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay" id="dlg-audio">
+          <div
+            class="dlg audio-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-audio-title"
+          >
+            <div class="dlg-title">
+              <span id="dlg-audio-title" data-i18n="audioSettings"></span>
+            </div>
+            <div class="dlg-body">
+              <button
+                type="button"
+                class="btn sound-toggle"
+                id="btn-sound-toggle"
+                aria-pressed="true"
+              >
+                <span class="sound-check" aria-hidden="true">✓</span
+                ><span data-i18n="soundEnabled"></span>
+              </button>
+              <div class="sound-volume-heading">
+                <label for="sound-volume" data-i18n="soundVolume"></label>
+                <output id="sound-volume-value" for="sound-volume">80%</output>
+              </div>
+              <input type="range" id="sound-volume" min="0" max="100" step="5" value="80" />
+              <div class="dlg-actions">
+                <button type="button" class="btn" data-close="dlg-audio" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== About dialog ===== -->
+        <div class="overlay" id="dlg-about">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-about-title"
+            style="width: 548px"
+          >
+            <div class="dlg-title">
+              <span id="dlg-about-title" data-i18n="about"></span>
+            </div>
+            <div class="dlg-body">
+              <!-- INLINE_ABOUT_LOGO -->
+              <div data-i18n="webVersion" style="text-align: center; margin: 6px 0"></div>
+              <div class="credits" data-i18n="credits"></div>
+              <div data-i18n="fontCredit" style="text-align: center; margin-top: 8px"></div>
+              <div class="dlg-actions">
+                <button class="btn" data-close="dlg-about" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Game over messagebox ===== -->
+        <div class="overlay" id="dlg-over">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-over-title"
+            style="width: 280px"
+          >
+            <div class="dlg-title"><span id="dlg-over-title">Color Linez Adapted</span></div>
+            <div class="dlg-body">
+              <div data-i18n="over" style="padding: 4px 2px; text-align: center"></div>
+              <div class="dlg-actions">
+                <button class="btn" id="btn-over-ok" data-close="dlg-over" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Shared challenger name dialog ===== -->
+        <div class="overlay" id="dlg-name">
+          <div
+            class="dlg record-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-name-title"
+          >
+            <div class="dlg-title">
+              <span id="dlg-name-title" data-i18n="defaultNameTitle"></span>
+            </div>
+            <div class="dlg-body">
+              <label class="name-label" for="name-input" data-i18n="enterName"></label>
+              <input class="field" id="name-input" maxlength="26" autocomplete="off" />
+              <div class="err-text" id="name-err" role="status"></div>
+              <div class="dlg-actions record-actions">
+                <button class="btn" id="btn-name-ok" data-i18n="ok"></button>
+                <button
+                  class="btn"
+                  id="btn-name-cancel"
+                  data-close="dlg-name"
+                  data-i18n="cancel"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay" id="dlg-register">
+          <div
+            class="dlg record-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-register-title"
+          >
+            <div class="dlg-title">
+              <span id="dlg-register-title" data-i18n="registerTitle"></span>
+            </div>
+            <div class="dlg-body">
+              <p id="register-summary"></p>
+              <p id="register-warning"></p>
+              <div class="dlg-actions record-actions">
+                <button
+                  class="btn"
+                  data-close="dlg-register"
+                  data-result="true"
+                  data-i18n="confirm"
+                ></button>
+                <button
+                  class="btn"
+                  data-close="dlg-register"
+                  data-edit="true"
+                  data-dialog-initial-focus
+                  data-i18n="editName"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overlay" id="dlg-reset">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="dlg-reset-title"
+            style="width: 340px"
+          >
+            <div class="dlg-title">
+              <span id="dlg-reset-title" data-i18n="resetTitle"></span>
+            </div>
+            <div class="dlg-body">
+              <p data-i18n="resetWarning"></p>
+              <div class="dlg-actions">
+                <button
+                  class="btn"
+                  data-close="dlg-reset"
+                  data-result="true"
+                  data-i18n="confirm"
+                ></button>
+                <button
+                  class="btn"
+                  data-close="dlg-reset"
+                  data-dialog-initial-focus
+                  data-i18n="cancel"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overlay" id="dlg-notice">
+          <div
+            class="dlg"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="notice-title"
+            style="width: 320px"
+          >
+            <div class="dlg-title">
+              <span id="notice-title" data-i18n="resetRetryTitle"></span>
+            </div>
+            <div class="dlg-body">
+              <p id="notice-text"></p>
+              <div class="dlg-actions">
+                <button class="btn" data-close="dlg-notice" data-i18n="ok"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- INLINE_SCRIPT -->
+  </body>
+</html>

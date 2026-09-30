@@ -1,0 +1,16 @@
+{
+  "name": "color-linez-adapted",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "build": "node tools/build.cjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "linkedom": "0.18.13",
+    "opentype.js": "2.0.0"
+  }
+}
