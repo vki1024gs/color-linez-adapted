@@ -11,7 +11,7 @@ let bound = false;
 let lastTouchAt = 0;
 
 function actionElement(target) {
-  return target?.closest?.('#cv, button, .menu-item, input[type="range"]') || null;
+  return target?.closest?.('#cv, button, a[href], .menu-item, input[type="range"]') || null;
 }
 
 function sameContext(gesture) {
@@ -59,8 +59,21 @@ function acceptClick(event) {
   return accepted;
 }
 
-function touchStartPoint() {
-  return released ? { clientX: released.x, clientY: released.y } : null;
+function consumeTouchTap(event, origin) {
+  if (
+    (event.pointerType !== 'touch' && event.pointerType !== 'pen') ||
+    event.defaultPrevented ||
+    !released ||
+    released.id !== event.pointerId ||
+    released.origin !== origin ||
+    released.cancelled ||
+    released.consumed ||
+    contacts.size ||
+    !sameContext(released)
+  )
+    return null;
+  released.consumed = true;
+  return { clientX: released.x, clientY: released.y };
 }
 
 function acceptRangeEvent(event) {
@@ -233,5 +246,5 @@ export {
   isTouchClick,
   acceptClick,
   acceptRangeEvent,
-  touchStartPoint,
+  consumeTouchTap,
 };

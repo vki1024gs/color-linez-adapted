@@ -25,7 +25,7 @@ import { gameCanvas, menubar } from './elements.js';
 import { closeMenus } from './menu-state.js';
 import { requestGameExit } from './session-actions.js';
 import { editDefaultChallengerName } from './challenger-name.js';
-import { acceptClick, isTouchClick, touchStartPoint } from './pointer-gestures.js';
+import { consumeTouchTap } from './pointer-gestures.js';
 
 function getCanvasPoint(e) {
   const rect = gameCanvas.getBoundingClientRect();
@@ -60,20 +60,24 @@ function bindGameInput() {
     if (event.button !== 0 || gameState.activeDialog || gameState.isExited) return;
     activateCanvasTarget(getCanvasTarget(event));
   });
-  gameCanvas.addEventListener('click', (event) => {
-    if (!isTouchClick(event) || !acceptClick(event)) return;
-    const target = getCanvasTarget(event);
-    const start = touchStartPoint();
-    if (!start) return;
-    const startTarget = getCanvasTarget(start);
-    if (
-      target?.type !== startTarget?.type ||
-      target?.row !== startTarget?.row ||
-      target?.column !== startTarget?.column
-    )
-      return;
-    activateCanvasTarget(target);
-  });
+  // Run after the gesture guard validates the release, including implicit touch capture.
+  document.addEventListener(
+    'pointerup',
+    (event) => {
+      const start = consumeTouchTap(event, gameCanvas);
+      if (!start) return;
+      const target = getCanvasTarget(event);
+      const startTarget = getCanvasTarget(start);
+      if (
+        target?.type !== startTarget?.type ||
+        target?.row !== startTarget?.row ||
+        target?.column !== startTarget?.column
+      )
+        return;
+      activateCanvasTarget(target);
+    },
+    true,
+  );
   gameCanvas.addEventListener('pointermove', (event) => {
     if (event.pointerType === 'touch' || event.pointerType === 'pen') return;
     const point = getCanvasPoint(event);
@@ -144,7 +148,7 @@ function bindKeyboardInput() {
       }
       if (e.key === 'Tab') {
         const controls = [
-          ...dlg.querySelectorAll('button:not([disabled]), input:not([disabled])'),
+          ...dlg.querySelectorAll('button:not([disabled]), input:not([disabled]), a[href]'),
         ].filter((control) => !control.hidden && !control.closest('[hidden]'));
         const at = controls.indexOf(document.activeElement);
         e.preventDefault();

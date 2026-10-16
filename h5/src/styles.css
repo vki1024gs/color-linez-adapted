@@ -20,7 +20,8 @@ body {
     env(safe-area-inset-left);
 }
 #cv,
-button {
+button,
+.release-link {
   touch-action: manipulation;
   -webkit-user-select: none;
   user-select: none;
@@ -195,6 +196,40 @@ body {
   height: 50px;
   margin: 0 auto;
   image-rendering: pixelated;
+}
+.about-actions {
+  position: relative;
+  min-height: 24px;
+  align-items: center;
+}
+.release-link {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 24px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #000 #000 #dfdfdf;
+  color: #000;
+  text-decoration: none;
+}
+.release-link svg {
+  pointer-events: none;
+}
+.release-link:hover,
+.release-link:active {
+  color: #000080;
+}
+.release-link:active {
+  border-color: #000 #dfdfdf #dfdfdf #000;
+}
+.release-link:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -2px;
 }
 .statusbar {
   display: flex;
